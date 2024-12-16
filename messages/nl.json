@@ -15,5 +15,10 @@
         "email": "E-mail",
         "message": "Bericht",
         "send": "Verstuur Bericht"
+    },
+    "Nav": {
+        "about": "Over mij",
+        "projects": "Projecten",
+        "contact": "Contact"
     }
 }

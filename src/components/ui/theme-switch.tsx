@@ -9,28 +9,28 @@ export function ThemeSwitch() {
     const { theme, setTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
 
-    // Prevent hydration mismatch by only rendering after mount
     useEffect(() => {
         setMounted(true)
     }, [])
 
-    if (!mounted) {
-        return null // Return null on server-side and first render
+    if (!mounted) return null
+
+    const toggleTheme = () => {
+        setTheme(theme === 'dark' ? 'light' : 'dark')
     }
 
     return (
         <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="fixed top-4 right-4 p-2 rounded-lg bg-white/10 backdrop-blur-lg border border-white/20 hover:bg-white/20 transition-colors"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            type="button"
-            aria-label="Toggle theme"
+            onClick={toggleTheme}
+            className="p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
         >
+            <span className="sr-only">Toggle theme</span>
             {theme === 'dark' ? (
-                <Sun className="w-5 h-5" />
+                <Sun className="w-5 h-5 text-yellow-400" />
             ) : (
-                <Moon className="w-5 h-5" />
+                <Moon className="w-5 h-5 text-slate-900" />
             )}
         </motion.button>
     )
