@@ -1,0 +1,19 @@
+{
+    "Hero": {
+        "title": "This is my portfolio",
+        "subtitle": "I create custom web applications using Next.js and Supabase, helping businesses achieve their digital goals with modern technology.",
+        "viewProjects": "View Projects",
+        "contact": "Contact Me"
+    },
+    "Projects": {
+        "title": "Featured Projects",
+        "description": "Here are some of the projects I've worked on"
+    },
+    "Contact": {
+        "title": "Let's Work Together",
+        "description": "Have a project in mind? Let's discuss how I can help you build it.",
+        "email": "Email",
+        "message": "Message",
+        "send": "Send Message"
+    }
+}
