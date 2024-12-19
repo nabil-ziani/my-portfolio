@@ -18,7 +18,15 @@ const poppins = Poppins({
     variable: '--font-poppins'
 })
 
-export default async function LocaleLayout({ children, params: { locale } }: { children: React.ReactNode, params: { locale: string } }) {
+export default async function LocaleLayout({
+    children,
+    params,
+}: {
+    children: React.ReactNode;
+    params: { locale: string };
+}) {
+    const locale = params.locale;
+
     if (!routing.locales.includes(locale as any)) {
         notFound();
     }

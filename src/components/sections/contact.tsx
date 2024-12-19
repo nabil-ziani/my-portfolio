@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
-import { Send, Download, Mail, Github, Linkedin, ArrowRight } from 'lucide-react'
+import { ArrowRight, Download, Mail, Github, Linkedin } from 'lucide-react'
 import { useInView } from 'react-intersection-observer'
+import { BlobSpotlight } from '../blob-spotlight'
 
 export function Contact() {
     const t = useTranslations('Contact')
@@ -13,26 +14,33 @@ export function Contact() {
     })
 
     return (
-        <section ref={ref} id="contact" className="relative py-32 overflow-hidden">
-            {/* Background effects */}
-            <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#ffe259]/10 rounded-full blur-3xl" />
-            </div>
+        <section ref={ref} id="contact" className="relative min-h-screen flex items-center py-32">
+            {/* Modern grid pattern background */}
+            <div className="absolute inset-0 grid-pattern opacity-[0.03]" />
+            <BlobSpotlight position="right" />
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6">
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
                     className="text-center mb-20"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                        <span className="bg-gradient-to-r from-[#ffe259] to-[#ffa751] bg-clip-text text-transparent">
-                            {t('title')}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={inView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{ duration: 0.5 }}
+                        className="inline-block mb-6"
+                    >
+                        <span className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium">
+                            Get in Touch
                         </span>
+                    </motion.div>
+
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+                        {t('title')}
                     </h2>
-                    <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    <p className="text-lg text-gray-400 max-w-2xl mx-auto">
                         {t('description')}
                     </p>
                 </motion.div>
@@ -46,24 +54,33 @@ export function Contact() {
                         className="space-y-6"
                     >
                         <div className="space-y-4">
-                            <input
-                                type="email"
-                                placeholder={t('email')}
-                                className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-[#ffa751]/50 outline-none transition-colors"
-                            />
-                            <textarea
-                                placeholder={t('message')}
-                                rows={6}
-                                className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-[#ffa751]/50 outline-none transition-colors resize-none"
-                            />
+                            <div className="relative">
+                                <input
+                                    type="email"
+                                    placeholder={t('email')}
+                                    className="w-full px-6 py-4 rounded-xl glass focus:border-[#4D7BF3]/50 outline-none transition-colors"
+                                />
+                                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#4D7BF3] to-[#845EF7] opacity-0 transition-opacity peer-focus:opacity-10" />
+                            </div>
+                            <div className="relative">
+                                <textarea
+                                    placeholder={t('message')}
+                                    rows={6}
+                                    className="w-full px-6 py-4 rounded-xl glass focus:border-[#4D7BF3]/50 outline-none transition-colors resize-none"
+                                />
+                                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#4D7BF3] to-[#845EF7] opacity-0 transition-opacity peer-focus:opacity-10" />
+                            </div>
                         </div>
                         <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="w-full py-4 rounded-xl bg-gradient-to-r from-[#ffe259] to-[#ffa751] text-gray-900 font-medium flex items-center justify-center gap-2 group"
+                            className="group relative w-full py-4 rounded-xl overflow-hidden bg-gradient-to-r from-[#4D7BF3] to-[#845EF7]"
                         >
-                            {t('send')}
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            <span className="relative z-10 flex items-center justify-center gap-2 text-white font-medium">
+                                {t('send')}
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </span>
+                            <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                         </motion.button>
                     </motion.div>
 
@@ -75,15 +92,15 @@ export function Contact() {
                         className="space-y-8"
                     >
                         {/* Download CV */}
-                        <div className="p-6 rounded-xl bg-white/5 border border-white/10 space-y-4">
-                            <h3 className="text-xl font-semibold">{t('downloadCV')}</h3>
-                            <p className="text-gray-400">{t('cvDescription')}</p>
+                        <div className="glass rounded-xl p-6 hover-card">
+                            <h3 className="text-xl font-bold mb-2">{t('downloadCV')}</h3>
+                            <p className="text-gray-400 mb-4">{t('cvDescription')}</p>
                             <motion.a
                                 href="/cv.pdf"
                                 download
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg glass hover:bg-white/10 transition-colors"
                             >
                                 <Download className="w-4 h-4" />
                                 {t('downloadButton')}
@@ -111,9 +128,10 @@ function SocialLink({ href, icon: Icon }: { href: string; icon: any }) {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+            className="group p-4 rounded-xl glass hover-card relative overflow-hidden"
         >
-            <Icon className="w-6 h-6" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#4D7BF3] to-[#845EF7] opacity-0 group-hover:opacity-10 transition-opacity" />
+            <Icon className="w-6 h-6 relative z-10" />
         </motion.a>
     )
 } 

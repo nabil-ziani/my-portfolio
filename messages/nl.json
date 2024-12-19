@@ -1,9 +1,22 @@
 {
+    "Nav": {
+        "about": "Over mij",
+        "projects": "Projecten",
+        "contact": "Contact"
+    },
     "Hero": {
         "title": "Moderne Web Ervaringen Bouwen",
         "subtitle": "Ik creëer aangepaste webapplicaties met Next.js en Supabase, en help bedrijven hun digitale doelen te bereiken met moderne technologie.",
         "viewProjects": "Bekijk Projecten",
-        "contact": "Contacteer Mij"
+        "contact": "Neem Contact Op"
+    },
+    "About": {
+        "title": "Over Mij",
+        "description": "Jouw beschrijving hier"
+    },
+    "Skills": {
+        "title": "Mijn Vaardigheden",
+        "description": "Technologieën en tools waarmee ik werk"
     },
     "Projects": {
         "title": "Uitgelichte Projecten",
@@ -14,11 +27,9 @@
         "description": "Heeft u een project in gedachten? Laten we bespreken hoe ik u kan helpen het te bouwen.",
         "email": "E-mail",
         "message": "Bericht",
-        "send": "Verstuur Bericht"
-    },
-    "Nav": {
-        "about": "Over mij",
-        "projects": "Projecten",
-        "contact": "Contact"
+        "send": "Verstuur Bericht",
+        "downloadCV": "Download CV",
+        "cvDescription": "Bekijk mijn gedetailleerde ervaring en vaardigheden",
+        "downloadButton": "Download CV"
     }
 }

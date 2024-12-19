@@ -8,104 +8,89 @@ export function Hero() {
     const t = useTranslations('Hero')
 
     return (
-        <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
-            {/* Background gradients */}
-            <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255,226,89,0.3),rgba(255,255,255,0))]" />
-            </div>
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+            {/* Modern grid pattern background */}
+            <div className="absolute inset-0 grid-pattern opacity-[0.03]" />
 
-            {/* Animated blobs met verbeterde animaties */}
-            <div className="absolute inset-0">
-                <motion.div
-                    animate={{
-                        scale: [1, 1.2, 1],
-                        x: [0, 30, 0],
-                        y: [0, -30, 0],
-                        rotate: [0, 10, 0]
-                    }}
-                    transition={{
-                        duration: 10,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "easeInOut"
-                    }}
-                    className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-[#ffe259]/20 rounded-full blur-[100px]"
-                />
-                <motion.div
-                    animate={{
-                        scale: [1, 1.3, 1],
-                        x: [0, -30, 0],
-                        y: [0, 30, 0],
-                        rotate: [0, -10, 0]
-                    }}
-                    transition={{
-                        duration: 15,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "easeInOut"
-                    }}
-                    className="absolute -bottom-40 -left-40 w-[700px] h-[700px] bg-[#ffa751]/20 rounded-full blur-[100px]"
-                />
-            </div>
+            {/* Gradient spotlight effects */}
+            <div className="absolute top-0 -left-4 w-96 h-96 bg-[#4D7BF3] rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob" />
+            <div className="absolute -bottom-8 right-0 w-96 h-96 bg-[#845EF7] rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-2000" />
 
-            {/* Content */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 md:py-48">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1 }}
+                    transition={{ duration: 0.8 }}
                     className="text-center space-y-8"
                 >
-                    <h1 className="text-6xl md:text-8xl font-bold">
-                        <span className="bg-gradient-to-r from-[#ffe259] to-[#ffa751] bg-clip-text text-transparent">
-                            {t('title')}
-                        </span>
-                    </h1>
+                    <div className="space-y-4">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            className="inline-block"
+                        >
+                            <span className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium">
+                                Full-Stack Developer
+                            </span>
+                        </motion.div>
 
-                    <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                        {t('subtitle')}
-                    </p>
+                        <h1 className="text-4xl md:text-7xl font-bold tracking-tight">
+                            <span className="gradient-text">
+                                {t('title')}
+                            </span>
+                        </h1>
+
+                        <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
+                            {t('subtitle')}
+                        </p>
+                    </div>
 
                     <div className="flex flex-wrap items-center justify-center gap-4">
-                        {/* Glass button */}
                         <motion.a
                             href="#projects"
-                            className="group relative px-8 py-4 rounded-full overflow-hidden bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300"
+                            className="group relative px-8 py-4 rounded-full overflow-hidden bg-gradient-to-r from-[#4D7BF3] to-[#845EF7]"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            <span className="relative z-10 flex items-center gap-2 text-gray-100 font-medium">
+                            <span className="relative z-10 flex items-center gap-2 text-white font-medium">
                                 {t('viewProjects')}
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </span>
-                            <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-[#ffe259]/20 to-[#ffa751]/20"
-                                animate={{
-                                    opacity: [0.2, 0.3, 0.2]
-                                }}
-                                transition={{
-                                    duration: 2,
-                                    repeat: Infinity,
-                                    repeatType: "reverse"
-                                }}
-                            />
+                            <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                         </motion.a>
 
-                        {/* Gradient button met donkere tekst */}
                         <motion.a
                             href="#contact"
-                            className="relative px-8 py-4 rounded-full overflow-hidden"
+                            className="px-8 py-4 rounded-full glass hover:bg-white/10 text-white font-medium transition-all duration-300"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            <span className="relative z-10 font-medium text-gray-900">
-                                {t('contact')}
-                            </span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#ffe259] to-[#ffa751]" />
+                            {t('contact')}
                         </motion.a>
                     </div>
                 </motion.div>
             </div>
+
+            {/* Scroll indicator */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2"
+            >
+                <motion.div
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                    }}
+                    className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center p-2"
+                >
+                    <motion.div className="w-1 h-1 bg-white rounded-full" />
+                </motion.div>
+            </motion.div>
         </section>
     )
 }
