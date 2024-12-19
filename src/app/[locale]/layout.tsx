@@ -4,12 +4,8 @@ import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { Inter, Poppins } from 'next/font/google';
 
-import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AnimatedLayout } from '@/components/animated-layout';
-
-// Import Mantine styles
-import '@mantine/core/styles.css';
 
 const inter = Inter({ subsets: ['latin'] })
 const poppins = Poppins({ 
@@ -36,37 +32,14 @@ export default async function LocaleLayout({
     return (
         <html lang={locale} suppressHydrationWarning className={poppins.variable}>
             <head>
-                <ColorSchemeScript />
             </head>
             <body className="font-poppins">
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                    <MantineProvider
-                        defaultColorScheme="dark"
-                        theme={{
-                            primaryColor: 'yellow',
-                            colors: {
-                                // Custom gradient colors
-                                brand: [
-                                    '#FFF5D9',
-                                    '#FFE7B3',
-                                    '#FFD98C',
-                                    '#FFCB66',
-                                    '#FFBD3F',
-                                    '#FFB019',
-                                    '#FFA200',
-                                    '#E69200',
-                                    '#CC8200',
-                                    '#B37200'
-                                ],
-                            },
-                        }}
-                    >
-                        <ThemeProvider>
-                            <AnimatedLayout>
-                                {children}
-                            </AnimatedLayout>
-                        </ThemeProvider>
-                    </MantineProvider>
+                    <ThemeProvider>
+                        <AnimatedLayout>
+                            {children}
+                        </AnimatedLayout>
+                    </ThemeProvider>
                 </NextIntlClientProvider>
             </body>
         </html>
