@@ -8,7 +8,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { AnimatedLayout } from '@/components/animated-layout';
 
 const inter = Inter({ subsets: ['latin'] })
-const poppins = Poppins({ 
+const poppins = Poppins({
     subsets: ['latin'],
     weight: ['400', '500', '600', '700'],
     variable: '--font-poppins'
@@ -31,8 +31,6 @@ export default async function LocaleLayout({
 
     return (
         <html lang={locale} suppressHydrationWarning className={poppins.variable}>
-            <head>
-            </head>
             <body className="font-poppins">
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <ThemeProvider>

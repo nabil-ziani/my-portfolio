@@ -2,85 +2,134 @@
 
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
-import { useInView } from 'react-intersection-observer'
-import { BlobSpotlight } from '../blob-spotlight'
+import Image from 'next/image'
+import { useInView } from 'framer-motion'
+import { useRef } from 'react'
 
-const timeline = [
-    {
-        year: '2023',
-        title: 'Senior Frontend Developer',
-        company: 'Company Name',
-        description: 'Leading the frontend team and implementing modern web solutions.'
-    },
-    // Voeg meer tijdlijn items toe
-]
+interface StatItemProps {
+    value: string
+    label: string
+}
+
+function StatItem({ value, label }: StatItemProps) {
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true })
+    
+    return (
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+        >
+            <div className="text-3xl font-bold bg-gradient-to-r from-[#36D1DC] to-[#5B86E5] bg-clip-text text-transparent">
+                {value}
+            </div>
+            <div className="text-sm text-gray-400 mt-1">{label}</div>
+        </motion.div>
+    )
+}
+
+interface TimelineItemProps {
+    year: string
+    title: string
+    description: string
+}
+
+function TimelineItem({ year, title, description }: TimelineItemProps) {
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true })
+    
+    return (
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="relative pl-8 pb-8 border-l border-white/10 last:pb-0"
+        >
+            <div className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-[#36D1DC] to-[#5B86E5]" />
+            <div className="text-sm text-gray-400">{year}</div>
+            <div className="font-medium mt-1">{title}</div>
+            <div className="text-sm text-gray-400 mt-1">{description}</div>
+        </motion.div>
+    )
+}
 
 export function About() {
     const t = useTranslations('About')
-    const [ref, inView] = useInView({
-        triggerOnce: true,
-        threshold: 0.1
-    })
+    const containerRef = useRef(null)
+    const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
     return (
-        <section ref={ref} id="about" className="relative min-h-screen flex items-center py-32">
-            {/* Modern grid pattern background */}
-            <div className="absolute inset-0 grid-pattern opacity-[0.03]" />
-            <BlobSpotlight position="right" />
-
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <section 
+            id="about" 
+            className="relative min-h-screen flex items-center py-20"
+        >
+            <div className="relative z-10 max-w-7xl mx-auto px-6">
+                <div className="grid md:grid-cols-2 gap-12 md:gap-20">
+                    {/* Left Column */}
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={inView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.6 }}
+                        ref={containerRef}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.5 }}
+                        className="space-y-6"
                     >
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={inView ? { opacity: 1, scale: 1 } : {}}
-                            transition={{ duration: 0.5 }}
-                            className="inline-block mb-6"
-                        >
-                            <span className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium">
-                                About Me
-                            </span>
-                        </motion.div>
-
-                        <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+                        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#36D1DC] to-[#5B86E5] bg-clip-text text-transparent">
                             {t('title')}
                         </h2>
-                        <p className="text-lg text-gray-400">
+                        <p className="text-gray-400">
                             {t('description')}
                         </p>
+                        
+                        {/* Stats */}
+                        <div className="grid grid-cols-3 gap-6 py-8">
+                            <StatItem value="5+" label={t('yearsExp')} />
+                            <StatItem value="20+" label={t('projects')} />
+                            <StatItem value="10+" label={t('clients')} />
+                        </div>
+
+                        {/* Timeline */}
+                        <div className="space-y-6 mt-12">
+                            <h3 className="text-xl font-semibold">{t('experience')}</h3>
+                            <div className="space-y-6">
+                                <TimelineItem
+                                    year="2023"
+                                    title={t('exp1.title')}
+                                    description={t('exp1.description')}
+                                />
+                                <TimelineItem
+                                    year="2021"
+                                    title={t('exp2.title')}
+                                    description={t('exp2.description')}
+                                />
+                                <TimelineItem
+                                    year="2019"
+                                    title={t('exp3.title')}
+                                    description={t('exp3.description')}
+                                />
+                            </div>
+                        </div>
                     </motion.div>
 
+                    {/* Right Column - Photo */}
                     <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={inView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="relative"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="relative aspect-square"
                     >
-                        <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-[#4D7BF3] to-[#845EF7] opacity-20" />
-                        
-                        {timeline.map((item, index) => (
-                            <motion.div
-                                key={item.year}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={inView ? { opacity: 1, x: 0 } : {}}
-                                transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                                className="relative pl-12 pb-8"
-                            >
-                                <div className="absolute left-0 w-8 h-8 rounded-full glass flex items-center justify-center">
-                                    <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#4D7BF3] to-[#845EF7] opacity-20" />
-                                </div>
-                                <div className="glass rounded-xl p-6 hover-card">
-                                    <span className="text-sm gradient-text">{item.year}</span>
-                                    <h3 className="text-xl font-semibold mt-1">{item.title}</h3>
-                                    <p className="text-gray-400 mt-1">{item.company}</p>
-                                    <p className="text-gray-300 mt-2">{item.description}</p>
-                                </div>
-                            </motion.div>
-                        ))}
+                        <div className="absolute inset-0 bg-white/[0.02] backdrop-blur-3xl rounded-3xl" />
+                        <div className="relative h-full rounded-2xl overflow-hidden">
+                            <Image
+                                src="/profile.jpg"
+                                alt={t('imageAlt')}
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
                     </motion.div>
                 </div>
             </div>

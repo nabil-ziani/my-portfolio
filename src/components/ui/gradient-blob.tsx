@@ -28,29 +28,30 @@ export function GradientBlob({
     }
 
     const colors = {
-        primary: 'from-[#4D7BF3] to-[#845EF7]',
-        secondary: 'from-[#845EF7] to-[#D946EF]'
+        primary: 'from-[#2563EB]/20 to-[#7C3AED]/20',
+        secondary: 'from-[#7C3AED]/20 to-[#2563EB]/20'
     }
 
-    const y = useTransform(scrollYProgress, [0, 1], [0, 100])
-    const rotate = useTransform(scrollYProgress, [0, 1], [0, 45])
-    const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2])
+    const y = useTransform(scrollYProgress, [0, 1], [0, 50])
+    const rotate = useTransform(scrollYProgress, [0, 1], [0, 15])
+    const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
 
     return (
         <motion.div
             ref={ref}
             style={{ y, rotate, scale }}
-            className={`absolute ${position === 'top' ? '-top-40' : '-bottom-40'} 
-                       ${position === 'top' ? '-right-40' : '-left-40'} 
-                       ${sizes[size]} rounded-full blur-[100px] opacity-20`}
+            className={`absolute ${position === 'top' ? '-top-1/4' : '-bottom-1/4'} 
+                       ${position === 'top' ? 'right-0' : '-left-1/4'} 
+                       ${sizes[size]} rounded-full mix-blend-multiply filter blur-[100px]`}
             animate={{
-                scale: [1, 1.1, 1],
-                rotate: [0, 10, 0],
+                scale: [1, 1.05, 1],
+                rotate: [0, 5, 0],
             }}
             transition={{
-                duration: 8,
+                duration: 10,
                 repeat: Infinity,
                 repeatType: "reverse",
+                ease: "easeInOut"
             }}
         >
             <div className={`w-full h-full rounded-full bg-gradient-to-r ${colors[color]}`} />

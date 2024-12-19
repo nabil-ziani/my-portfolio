@@ -1,57 +1,49 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
+import { motion } from 'framer-motion'
+import Link from 'next/link'
 
-import { cn } from "@/lib/utils"
-
-const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default:
-          "bg-gradient-to-br from-violet-600 via-purple-500 to-pink-500 text-white shadow hover:opacity-90",
-        destructive:
-          "bg-red-500 text-white shadow-sm hover:bg-red-600",
-        outline:
-          "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+interface ButtonProps {
+    children: React.ReactNode
+    href?: string
+    variant?: 'gradient' | 'outline'
+    size?: 'sm' | 'md' | 'lg'
+    className?: string
+    onClick?: () => void
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+export function Button({
+    children,
+    href,
+    variant = 'gradient',
+    size = 'md',
+    className = '',
+    onClick,
+}: ButtonProps) {
+    const baseStyles = 'inline-flex items-center justify-center rounded-full font-medium transition-all duration-300'
+    
+    const variants = {
+        gradient: 'bg-gradient-to-r from-[#36D1DC] to-[#5B86E5] text-white hover:shadow-lg hover:shadow-blue-500/25',
+        outline: 'border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white'
+    }
+    
+    const sizes = {
+        sm: 'px-4 py-2 text-sm',
+        md: 'px-6 py-3 text-base',
+        lg: 'px-8 py-4 text-lg'
+    }
+    
+    const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`
+    
+    const Component = motion(href ? Link : 'button')
+    
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
+        <Component
+            href={href || ''}
+            onClick={onClick}
+            className={classes}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+        >
+            {children}
+        </Component>
     )
-  }
-)
-Button.displayName = "Button"
-
-export { Button, buttonVariants }
+}

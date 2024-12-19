@@ -11,16 +11,33 @@
         "contact": "Neem Contact Op"
     },
     "About": {
-        "title": "Over Mij",
-        "description": "Jouw beschrijving hier"
+        "title": "Over mij",
+        "description": "Je persoonlijke beschrijving hier...",
+        "yearsExp": "Jaren Ervaring",
+        "projects": "Projecten",
+        "clients": "Tevreden Klanten",
+        "experience": "Ervaring",
+        "exp1": {
+            "title": "Senior Developer",
+            "description": "Beschrijving van je huidige rol..."
+        },
+        "exp2": {
+            "title": "Frontend Developer",
+            "description": "Beschrijving van je vorige rol..."
+        },
+        "exp3": {
+            "title": "Junior Developer",
+            "description": "Beschrijving van je eerste rol..."
+        },
+        "imageAlt": "Profielfoto"
     },
     "Skills": {
-        "title": "Mijn Vaardigheden",
-        "description": "Technologieën en tools waarmee ik werk"
+        "title": "Technologieën",
+        "description": "Ik werk met moderne technologieën om schaalbare en onderhoudbare applicaties te bouwen. Hier zijn enkele tools en frameworks waar ik ervaring mee heb:"
     },
     "Projects": {
-        "title": "Uitgelichte Projecten",
-        "description": "Hier zijn enkele projecten waaraan ik heb gewerkt"
+        "title": "Projecten",
+        "description": "Een selectie van projecten waar ik trots op ben. Elk project is gebouwd met een focus op moderne technologie en gebruikerservaring."
     },
     "Contact": {
         "title": "Laten We Samenwerken",
