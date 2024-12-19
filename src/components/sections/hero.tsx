@@ -3,18 +3,19 @@
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { ArrowRight } from 'lucide-react'
+import { GradientBlob } from '../ui/gradient-blob'
+import { ParticleGrid } from '../ui/particle-grid'
 
 export function Hero() {
     const t = useTranslations('Hero')
 
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-            {/* Modern grid pattern background */}
+            {/* Background effects */}
             <div className="absolute inset-0 grid-pattern opacity-[0.03]" />
-
-            {/* Gradient spotlight effects */}
-            <div className="absolute top-0 -left-4 w-96 h-96 bg-[#4D7BF3] rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob" />
-            <div className="absolute -bottom-8 right-0 w-96 h-96 bg-[#845EF7] rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-2000" />
+            <ParticleGrid />
+            <GradientBlob size="lg" position="top" color="primary" />
+            <GradientBlob size="md" position="bottom" color="secondary" />
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 md:py-48">
                 <motion.div
