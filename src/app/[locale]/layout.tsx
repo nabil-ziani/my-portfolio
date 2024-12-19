@@ -6,6 +6,7 @@ import { Inter, Poppins } from 'next/font/google';
 
 import { ThemeProvider } from '@/components/theme-provider';
 import { AnimatedLayout } from '@/components/animated-layout';
+import { SettingsPanel } from '@/components/settings-panel'
 
 const inter = Inter({ subsets: ['latin'] })
 const poppins = Poppins({
@@ -35,6 +36,7 @@ export default async function LocaleLayout({
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <ThemeProvider>
                         <AnimatedLayout>
+                            <SettingsPanel />
                             {children}
                         </AnimatedLayout>
                     </ThemeProvider>
